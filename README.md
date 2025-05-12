@@ -52,7 +52,7 @@ Equivalen a las capas 5, 6 y 7 del modelo OSI. Protocolos de transferencia, FTP 
 ---
 
 ### 1.2 Diagrama
-![](.ImagenesDOC/drawio)
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/476c07b6bd81db7575337a900c01ae4b6b86c994/ImagenesDOC/drawio.png)
 Como se observa en el diagrama, se trata de una red donde hay un router con acceso a internet que lleva firewall con zona desmilitarizada donde se alojan los servidores www/mail/dns, después sale por un firewall interno que lleva a un switch núcleo que forma parte de un anillo de switches que recorre donde cada switch corresponde a su sala pertinente, como sala servidores, sala recepción, sala biblioteca, sala aula y sala laboratorio para finalmente volver al switch núcleo.
 
 ---
