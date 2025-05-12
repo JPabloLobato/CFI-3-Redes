@@ -64,7 +64,7 @@ Como se observa en el diagrama, se trata de una red donde hay un router con acce
 Utilizamos la Fórmula de Shannon para calcular la capacidad necesaria en los enlaces cableados e inalámbricos del campus.
 
 **Fórmula de Shannon:**  
-\[ C = B \cdot \log_2(1 + SNR) \]
+\[ C = B*log_2(1 + SNR) \]
 
 Donde:
 - B = Ancho de banda  
@@ -93,7 +93,7 @@ Se envían 1000 bytes incluyendo:
 
 **Sobrecarga:** 78 bytes  
 **Eficiencia:**  
-\[ \text{Eficiencia} = \frac{1000}{1000 + 78} = 92.8\% \]  
+\[ Eficiencia = 1000/(1000 + 78) = 92.8%]  
 Sobrecarga: 7.2%
 
 ---
