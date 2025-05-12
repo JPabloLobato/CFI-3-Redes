@@ -190,18 +190,31 @@ División en áreas lógicas con máscara `/22` (1022 hosts útiles cada una).
 
 ### 5.1 Diseño de Servicios
 
-**Portal del Campus:**  
-- Interactivo, información académica, acceso seguro via HTTPS
+Se usarán servicios basados en los protocolos HTTP/HTTPS y estarán destinados hacía dos propositos dentro del campus universitario: 
 
-**Distribuidor Multimedia:**  
-- Grabaciones, apuntes, accesible con HTTP/HTTPS
+El Portal del Campus, que se tratara de un sitio web interactivo para los docentes, personal y alumnos. En dicho portal se proveerá información esencial como horarios de clases, eventos o recursos académicos entre otros. El HTTPS se destinará a mantener la seguridad y privacidad de información sensible con datos personales. 
 
-**Resolución de Nombres:**  
-- Sistema DNS local con caché  
-- Seguridad mediante DNSSEC
+Un Distribuidor de Recursos Multimedia que se usará para alojar y distribuir recursos educativos y de otro tipo como: 
 
-**Autenticación:**  
-- Usuario/contraseña
+-Acceso a grabaciones de clases. 
+
+-Material de apoyo (Apuntes, vídeos etc.). 
+
+Para esto se utiliza HTTP y HTTPS, y según la importancia del contenido, se priorizará con HTTPS que requiere autenticación. 
+
+Para la Resolución de Nombres (DNS): 
+
+-Se usará DNS como componente fundamental para el funcionamiento del campus. 
+
+-Cuando se ingrese un nombre de dominio, el sistema lo traduce a una dirección IP correspondiente. 
+
+-Para mejorar la eficiencia se usará un sistema de caché DNS local dentro del campus.  
+
+Para Autentificación de Usuarios: 
+
+Entre los métodos para controlar el acceso de los usuarios a los servicios de red están: 
+
+-Autenticación por credenciales: Los usuarios tendrán un usuario y contraseña. 
 
 ### 5.2 Streaming y Multimedia
 
