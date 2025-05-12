@@ -52,27 +52,7 @@ Equivalen a las capas 5, 6 y 7 del modelo OSI. Protocolos de transferencia, FTP 
 ---
 
 ### 1.2 Diagrama
-````
-                              [ Servidores ]
-                                   |
-                             +-- [ Switch ] --+
-                             |                |
-                      [ Firewall ]         [ internet ]
-                             |
-                         [ Switch ]
-                            / | \
-                           /  |  \
-              +-----------+   |   +------------+
-              |               |                |
-        [ Switch ]       [ Switch ]        [ Switch ]
-         /       \            |              /     \
- [PC]--[AP]    [PC]--[AP]  [Servidor]   [Switch]  [PC]
-                                       /        \
-                                    [PC]        [AP]
-
-Dispositivos inalambricos-->[alarma]--[camara]---[termostato]---[sensor de movimiento]
-
-````
+![](.ImagenesDOC/drawio)
 Como se observa en el diagrama, se trata de una red donde hay un router con acceso a internet que lleva firewall con zona desmilitarizada donde se alojan los servidores www/mail/dns, después sale por un firewall interno que lleva a un switch núcleo que forma parte de un anillo de switches que recorre donde cada switch corresponde a su sala pertinente, como sala servidores, sala recepción, sala biblioteca, sala aula y sala laboratorio para finalmente volver al switch núcleo.
 
 ---
