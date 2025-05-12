@@ -52,7 +52,7 @@ Equivalen a las capas 5, 6 y 7 del modelo OSI. Protocolos de transferencia, FTP 
 ---
 
 ### 1.2 Diagrama
-![](https://github.com/JPabloLobato/CFI-3-Redes/blob/476c07b6bd81db7575337a900c01ae4b6b86c994/ImagenesDOC/drawio.png)
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/drawio.png)
 Como se observa en el diagrama, se trata de una red donde hay un router con acceso a internet que lleva firewall con zona desmilitarizada donde se alojan los servidores www/mail/dns, después sale por un firewall interno que lleva a un switch núcleo que forma parte de un anillo de switches que recorre donde cada switch corresponde a su sala pertinente, como sala servidores, sala recepción, sala biblioteca, sala aula y sala laboratorio para finalmente volver al switch núcleo.
 
 ---
@@ -288,16 +288,23 @@ Para asegurar el campus, se implementa un plan en capas. Cada nivel de la red cu
 ## 7. Implementación Cisco Packet Tracer
 
 ### 7.1 Construcción de la Topología del Campus
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/cisco.png)
 
 La red dividida en segmentos:
 
-*(Agregar aquí imagen o descripción gráfica si aplica)*
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscodmz.png)
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoiot.png)
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoadministracion.png)
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoaservidores.png)
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscousuario.png)
 
 ---
 
 ### 7.2 Configuración de Rutas y Políticas de Seguridad
 
 **Topología de los switches:**
+
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoswtich.png)
 
 Hemos creado una red con una topología denominada **topología de estrella**, todos los switches están como *client* menos el primero de usuario que está como *transparent*, ya que pasa al de profesor y alumno.
 
@@ -316,18 +323,18 @@ Tampoco hemos puesto **ACLs** por el momento, aunque el firewall mirará cada bi
 
 **Ping entre el PC que administra los IoT y el detector de monitoreo:**
 
-*(Agregar aquí captura o resultado de prueba)*
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoping.png)
 
 Dejo aquí la muestra de cuál es el ping del sensor de monitoreo:
 
-*(Agregar aquí captura o resultado de prueba)*
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoiot2.png)
 
 En esta imagen también verá que los **Access Point** están todos configurados de la misma manera.  
 Todos tienen como contraseña el `<nombre del segmento>password` y como SSID `<nombre del segmento>AC`, menos el de **IoT** que se llama `IoT_P1-`.
 
----
-
 **Servidor Web:**
+
+![](https://github.com/JPabloLobato/CFI-3-Redes/blob/7628140b8c698cc87a6e637a556018fe1d97c362/ImagenesDOC/ciscoweb.png)
 
 En este servidor solo tenemos activado el **HTTP y HTTPS** con sus archivos creados emulando una web completa de una universidad.
 
