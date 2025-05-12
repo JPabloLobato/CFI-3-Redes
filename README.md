@@ -283,3 +283,74 @@ En cuanto al Ancho de Banda, la calidad del streaming se adaptará dinámicament
 | Acceso remoto seguro     | VPN IPsec (AES-256/SHA-2)     | Cifrado para administración y teletrabajo                  |
 | Cifrado extremo a extremo| TLS 1.3 y SRTP                | Protección para HTTP/HTTPS, SIP y multimedia               |
 | Protección DNS           | DNSSEC                        | Firmas digitales para evitar spoofing                      |
+
+### 6.2 Configuración y justificación
+
+Para asegurar el campus, se implementa un plan en capas. Cada nivel de la red cuenta con controles específicos:
+
+- **Perímetro**: Se configuran firewalls Cisco FPR 5505 en alta disponibilidad. Se aplican políticas de filtrado, inspección profunda de paquetes (IPS) y protección DDoS.  
+  **Justificación**: mitigar amenazas externas antes de que ingresen a la red interna.
+
+- **Red Interna**: Segmentación por VLAN y switches L3 para aislar tráfico según función (IoT, usuarios, multimedia, administración).  
+  **Justificación**: evitar movimientos laterales y contener posibles infecciones.
+
+- **Acceso Remoto**: Se activa VPN IPsec con cifrado AES-256 y autenticación SHA-2. Solo usuarios autorizados acceden a servicios administrativos desde fuera.  
+  **Justificación**: proteger la integridad de la red durante el teletrabajo o tareas remotas.
+
+- **DNS Seguro**: Se despliega DNSSEC en los servidores DNS internos.  
+  **Justificación**: prevenir ataques de suplantación (DNS spoofing) y garantizar integridad en la resolución de nombres.
+
+- **Control de Usuarios y Dispositivos**: Implementación de NAC para identificar dispositivos y aplicar políticas según perfil. Integración con servidores con protocolo AAA para autenticación centralizada.  
+  **Justificación**: asegurar que solo usuarios válidos accedan a la red.
+
+---
+
+## 7. Implementación Cisco Packet Tracer
+
+### 7.1 Construcción de la Topología del Campus
+
+La red dividida en segmentos:
+
+*(Agregar aquí imagen o descripción gráfica si aplica)*
+
+---
+
+### 7.2 Configuración de Rutas y Políticas de Seguridad
+
+**Topología de los switches:**
+
+Hemos creado una red con una topología denominada **topología de estrella**, todos los switches están como *client* menos el primero de usuario que está como *transparent*, ya que pasa al de profesor y alumno.
+
+En este caso no puedo calcular el enrutamiento de **Dijkstra** por el simple hecho de que cada switch maneja VLANs diferentes, haciendo que no se pueda hacer un ping entre ellas.
+
+No hemos configurado el **VPN**, pero el **firewall 2** que se encuentra entre la **DMZ** y la red interna, tiene un **security-level 50** para lo que entra desde la red interna a la DMZ y un **security-level 100** para lo que entra desde la DMZ a la red interna, impidiendo su conexión.  
+Al principio quería poner 100 solo a los segmentos de servidores e IoT pero no supe hacerlo y se lo coloqué a todos.
+
+El **firewall 1**, situado entre el **router y la DMZ**, tiene un **security-level 0** para lo que sale hacia el router y un **50** para lo que entra desde el router a la DMZ.
+
+Tampoco hemos puesto **ACLs** por el momento, aunque el firewall mirará cada bit de información que pase por la red.
+
+---
+
+### 7.3 Pruebas de funcionamiento
+
+**Ping entre el PC que administra los IoT y el detector de monitoreo:**
+
+*(Agregar aquí captura o resultado de prueba)*
+
+Dejo aquí la muestra de cuál es el ping del sensor de monitoreo:
+
+*(Agregar aquí captura o resultado de prueba)*
+
+En esta imagen también verá que los **Access Point** están todos configurados de la misma manera.  
+Todos tienen como contraseña el `<nombre del segmento>password` y como SSID `<nombre del segmento>AC`, menos el de **IoT** que se llama `IoT_P1-`.
+
+---
+
+**Servidor Web:**
+
+En este servidor solo tenemos activado el **HTTP y HTTPS** con sus archivos creados emulando una web completa de una universidad.
+
+También hacemos una “falsa simulación” con el **proxy** y el **DNS**.  
+Supuestamente lo que haría el DNS sería enviar al servidor proxy y luego al servidor web para protegerlo.
+
