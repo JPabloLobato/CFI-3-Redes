@@ -205,15 +205,15 @@ División en áreas lógicas con máscara `/22` (1022 hosts útiles cada una).
 
 ### 5.2 Streaming y Multimedia
 
-**Tecnologías:**  
-- UDP + RTP/RTCP para transmisión en vivo  
-- HTTP para contenidos almacenados  
-- DASH para streaming adaptativo
+Para el streaming y la distribución de contenido en el campus se hará uso de las siguiente UDP Streaming, HTTP Streaming y DASH: 
 
-**Optimización:**  
-- Codificación a múltiples velocidades  
-- Buffering  
-- Control de carga para evitar sobrecargas
+Se utilizará el UDP para transmisiones en vivo con baja latencia de tal forma que pueda tolerar pérdidas de paquetes y se usarán protocolos RTP/RTCP para gestionar la entrega y calidad del streaming. 
+
+Para la distribución de contenido como grabaciones de clase, se usará el HTTP que dividirá el contenido en pequeños fragmentos que permiten una transmisión óptima con firewalls y proxies. 
+
+Se implementará DASH para tecinas de streaming adaptativo, ya que este permite al servidor proporcionar múltiples versiones del contenido a diferentes velocidades de bits, gracias a esto el cliente podrá cambiar entre estas versiones en función de su ancho de banda. 
+
+En cuanto al Ancho de Banda, la calidad del streaming se adaptará dinámicamente a la disponible para cada usuario, para esto el servidor codificará el contenido en múltiples velocidades de bits para que el cliente puede elegir la más optima, se implementara buffering para suavizar las fluctuaciones del ancho de banda y así evitar interrupciones en la reproducción y por último se hará uso de controles de gestión para evitar sobrecargaas en la red.
 
 ---
 
