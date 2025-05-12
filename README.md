@@ -152,37 +152,51 @@ División en áreas lógicas con máscara `/22` (1022 hosts útiles cada una).
 
 ### 1. Definición de Protocolos
 
-**TCP**  
-- Usos: sistemas administrativos, transferencias, portales.  
-- Ventajas: fiabilidad, control de flujo y congestión.
+### TCP
+- **Servicios críticos:** acceso a sistemas administrativos, transferencias de archivos, portal del campus, bases de datos.  
+- **Ventajas:** control de flujo y congestión, fiabilidad (retransmisiones), garantía de orden.
 
-**UDP**  
-- Usos: cámaras IP, sensores IoT, streaming.  
-- Ventajas: baja latencia, menos sobrecarga.
+### UDP
+- **Transmisiones en tiempo real:** cámaras IP, sensores IoT que envían datos de forma continua, streaming en vivo con RTP/RTCP.  
+- **Ventajas:** baja sobrecarga, latencia reducida.  
+- **Gestión de calidad:** implementar *buffering adaptativo*, *FEC* y *control de tasa* para compensar la ausencia de retransmisión.
+
+---
 
 ### 2. Cálculo del Tamaño de Ventana
 
-**Fórmula:**  
-- BDP (bytes) = RTT (s) × Ancho de banda (bytes/s)  
-- Ventana (segmentos) = BDP / MSS
+Se utiliza el **Bandwidth–Delay Product (BDP)** para dimensionar la ventana:  
+`BDP (bytes) = RTT (s) × Ancho de banda (bytes/s)`  
+`Ventana (segmentos) = BDP / MSS`
 
-**Parámetros:**
-- Backbone (10 Gb/s, RTT 2 ms, MSS 1460 B):  
-  BDP = 2.5×10⁶ B → Ventana ≈ 1712 segmentos
+### Parámetros:
+- **Backbone** (10 Gb/s, RTT 2 ms, MSS 1460 B):  
+  `BDP = 0.002 s × 10×10⁹ bit/s = 2.5 ×10⁶ B → Ventana ≈ 1712 segmentos`
 
-- Distribución–acceso (1 Gb/s, RTT 5 ms, MSS 1460 B):  
-  BDP = 625,000 B → Ventana ≈ 428 segmentos
+- **Distribución–acceso** (1 Gb/s, RTT 5 ms, MSS 1460 B):  
+  `BDP = 0.005 s × 1×10⁹ bit/s = 625,000 B → Ventana ≈ 428 segmentos`
+
+---
 
 ### 3. Contribución al Control de Congestión
 
-- **Slow Start**: crecimiento exponencial  
-- **Congestion Avoidance**: crecimiento lineal  
-- **Fast Retransmit / Fast Recovery**: recuperación ante pérdida
+- **Slow Start:** crecimiento exponencial hasta *ssthresh* para evitar arranques bruscos.  
+- **Congestion Avoidance:** crecimiento lineal tras alcanzar *ssthresh*.  
+- **Fast Retransmit / Fast Recovery:** retransmisión rápida y ajuste de la ventana a la mitad en caso de pérdidas.
+
+> Un tamaño de ventana igual al BDP previene:
+> 1. Subutilización (ventana muy pequeña) → desperdicio de ancho de banda.
+> 2. Congestión excesiva (ventana muy grande) → alta latencia y pérdidas.
+
+---
 
 ### 4. Gestión de Flujo en UDP
 
-- Uso de buffers, FEC, jitter buffering  
-- Adaptación dinámica por parte de la aplicación
+- Sin control de congestión nativo: la aplicación debe:
+  - Limitar la tasa de envío (RTP/RTCP)
+  - Usar *jitter buffers*
+  - Aplicar *Forward Error Correction (FEC)*
+- Implementar *buffering adaptativo* en el receptor para suavizar variaciones de retardo.
 
 ---
 
